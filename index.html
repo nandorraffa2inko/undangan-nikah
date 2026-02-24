@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Luxury Royal Wedding Invitation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+<audio id="bg-music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="music-player">
+<div class="music-ring"></div>
+<button id="music-toggle">♫</button>
+</div>
+
+<!-- OPENING -->
+<div id="opening-cover">
+<div class="curtain left"></div>
+<div class="curtain right"></div>
+
+<div class="opening-content">
+<h4>THE WEDDING OF</h4>
+<h1>Rama & Sinta</h1>
+<button id="btn-buka">Buka Undangan</button>
+</div>
+</div>
+
+<main>
+
+<section class="hero">
+<div class="hero-content">
+<h4>WE ARE GETTING MARRIED</h4>
+<h1>Rama & Sinta</h1>
+<p>20 Desember 2026</p>
+</div>
+</section>
+
+<section class="countdown">
+<h2>Menuju Hari Bahagia</h2>
+<div class="countdown-timer" id="countdown-timer">
+<div class="count-box"><h3 id="days">0</h3><span>Hari</span></div>
+<div class="count-box"><h3 id="hours">0</h3><span>Jam</span></div>
+<div class="count-box"><h3 id="minutes">0</h3><span>Menit</span></div>
+<div class="count-box"><h3 id="seconds">0</h3><span>Detik</span></div>
+</div>
+</section>
+
+<section class="couple" data-aos="fade-up">
+<h2>Mempelai</h2>
+<div class="couple-container">
+<div class="person">
+<h3>Rama Setiawan</h3>
+<p>Putra dari Bapak Fulan & Ibu Fulana</p>
+</div>
+
+<div class="amp">&</div>
+
+<div class="person">
+<h3>Sinta Maharani</h3>
+<p>Putri dari Bapak Fulan & Ibu Fulana</p>
+</div>
+</div>
+</section>
+
+<section class="event">
+    <!-- KISAH AWAL PERTEMUAN -->
+<section class="story-section" data-aos="fade-up">
+<h2>Kisah Awal Pertemuan</h2>
+
+<div class="story-container">
+
+<div class="story-item left" data-aos="fade-right">
+<div class="story-content">
+<h3>2018</h3>
+<p>
+Kami pertama kali bertemu tanpa sengaja di sebuah acara kampus.
+Perkenalan sederhana yang tak pernah kami sangka
+akan menjadi awal dari perjalanan panjang ini.
+</p>
+</div>
+</div>
+
+<div class="story-item right" data-aos="fade-left">
+<div class="story-content">
+<h3>2020</h3>
+<p>
+Waktu dan jarak sempat menguji hubungan kami,
+namun keyakinan dan doa membuat kami semakin yakin
+bahwa ini adalah takdir yang telah ditulis.
+</p>
+</div>
+</div>
+
+<div class="story-item left" data-aos="fade-right">
+<div class="story-content">
+<h3>2026</h3>
+<p>
+Dengan penuh rasa syukur, kami memutuskan
+untuk melangkah bersama dalam ikatan suci pernikahan.
+Semoga cinta ini abadi selamanya.
+</p>
+</div>
+</div>
+
+</div>
+</section>
+<h2>Detail Acara</h2>
+
+<div class="event-card">
+<h3>Akad Nikah</h3>
+<p>Minggu, 20 Desember 2026</p>
+<p>08.00 WIB</p>
+<p>Masjid Agung Kota</p>
+</div>
+
+<div class="event-card">
+<h3>Resepsi</h3>
+<p>Minggu, 20 Desember 2026</p>
+<p>11.00 - 14.00 WIB</p>
+<p>Gedung Serbaguna Kota</p>
+</div>
+</section>
+
+<section class="gift">
+<h2>Wedding Gift</h2>
+<div class="bank-card">
+<h3>BCA</h3>
+<p class="bank-number">1234567890</p>
+<p>a.n Rama Setiawan</p>
+<button class="copy-btn">Salin Nomor Rekening</button>
+</div>
+</section>
+
+<section class="parallax-section">
+<div class="parallax-overlay"></div>
+<div class="parallax-content">
+<h2>Our Special Day</h2>
+</div>
+</section>
+
+<section class="comment-section">
+<h2>Ucapan & Doa</h2>
+
+<form id="comment-form" class="comment-box">
+<input type="text" id="name" placeholder="Nama Anda" required>
+<textarea id="message" placeholder="Tulis ucapan..." required></textarea>
+<button type="submit">Kirim Ucapan</button>
+</form>
+
+<div class="comment-list" id="comment-list"></div>
+</section>
+
+<footer>
+<h3>Rama & Sinta</h3>
+<p>Terima kasih atas doa & restunya</p>
+</footer>
+
+</main>
+
+<canvas id="gold-particles"></canvas>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({duration:1200,once:true});</script>
+<script src="script.js"></script>
+
+</body>
+</html>
