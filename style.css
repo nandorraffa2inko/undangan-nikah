@@ -8,23 +8,46 @@
 
 body{
     font-family:'Poppins',sans-serif;
-    background:#0f0f0f;
-    color:#fff;
+    /* Background krem terang dengan tekstur kertas/watercolor halus */
+    background-color: #fdfbf7;
+    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    color:#4a3b32; /* Teks warna cokelat gelap elegan */
     overflow-x:hidden;
 }
 
-/* ================= GOLD TEXT ================= */
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-    background: linear-gradient(45deg, #d4af37, #f6d365, #fff3b0);
-    
-    /* Standard */
-    background-clip: text;
-    color: transparent;
+/* Ornamen Daun di atas dan bawah layar (Efek Botanical) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: url('https://png.pngtree.com/png-vector/20221021/ourmid/pngtree-watercolor-eucalyptus-leaves-border-png-image_6356784.png') top center/contain no-repeat;
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+}
 
-    /* Safari / Chrome */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: url('https://png.pngtree.com/png-vector/20221021/ourmid/pngtree-watercolor-eucalyptus-leaves-border-png-image_6356784.png') bottom center/contain no-repeat;
+    opacity: 0.8;
+    pointer-events: none;
+    transform: rotate(180deg);
+    z-index: 0;
+}
+
+/* ================= TYPOGRAPHY ================= */
+h1, h2, h3 {
+    font-family: 'Great Vibes', cursive;
+    color: #8c7355; /* Warna cokelat emas/bronze */
+    font-weight: 400;
 }
 
 /* ================= OPENING COVER ================= */
@@ -37,21 +60,8 @@ h1, h2, h3 {
     justify-content:center;
     align-items:center;
     transition:1.5s;
-    background:radial-gradient(circle at 30% 20%, #4b3426 0%, #1a120c 40%, #000000 100%);
-}
-
-/* Glow emas elegan */
-#opening-cover::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:radial-gradient(circle at 70% 80%, rgba(212,175,55,0.15), transparent 60%);
-    animation:goldGlow 6s ease-in-out infinite alternate;
-}
-
-@keyframes goldGlow{
-    from{opacity:0.6;}
-    to{opacity:1;}
+    background-color: #fdfbf7;
+    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
 }
 
 /* Opening Content */
@@ -59,55 +69,60 @@ h1, h2, h3 {
     position:relative;
     z-index:10;
     text-align:center;
-    color:white;
+    color:#4a3b32;
 }
 
 .opening-content h4{
-    letter-spacing:6px;
+    letter-spacing:4px;
     margin-bottom:15px;
-    font-weight:300;
+    font-weight:400;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
 .opening-content h1{
-    font-size:4rem;
-    margin:15px 0;
+    font-size:4.5rem;
+    margin:10px 0;
+    color: #7a6345;
 }
 
 /* Button */
 #btn-buka,
 .opening-content button{
     margin-top:30px;
-    padding:15px 45px;
+    padding:12px 40px;
     border-radius:50px;
-    border:1px solid rgba(255,255,255,0.2);
-    background:linear-gradient(45deg,#d4af37,#f6d365);
+    border: 1px solid #7b9e78; /* Border hijau daun */
+    background: #fcf9f2;
     cursor:pointer;
     font-weight:600;
     transition:.4s;
-    letter-spacing:2px;
+    letter-spacing:1px;
+    color: #7b9e78;
 }
 
 #btn-buka:hover,
 .opening-content button:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 30px #d4af37;
-    background:linear-gradient(45deg,#d4af37,#f5e6a3);
-    color:#3a2a1d;
+    transform:scale(1.05);
+    background: #7b9e78;
+    color: white;
+    box-shadow: 0 5px 15px rgba(123, 158, 120, 0.4);
 }
 
-/* Curtain */
+/* Curtain - Diubah menjadi tirai terang */
 .curtain{
     position:absolute;
     top:0;
     width:50%;
     height:100%;
-    background:linear-gradient(145deg,#3a2a1d,#1a120c);
+    background: #f4eee1;
     transition:1.8s cubic-bezier(.77,0,.18,1);
     z-index:1;
 }
 
-.left{left:0;}
-.right{right:0;}
+.left{left:0; border-right: 1px solid #e8dec8;}
+.right{right:0; border-left: 1px solid #e8dec8;}
 
 #opening-cover.open .left{transform:translateX(-100%);}
 #opening-cover.open .right{transform:translateX(100%);}
@@ -116,22 +131,23 @@ h1, h2, h3 {
     visibility:hidden;
 }
 
+/* ================= SECTION GLOBAL ================= */
+section{
+    padding:80px 20px;
+    text-align:center;
+    position: relative;
+    z-index: 2; /* Di atas dekorasi daun body */
+}
+
 /* ================= HERO ================= */
 .hero{
     height:100vh;
-    background:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
     position:relative;
-}
-
-.hero::after{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.6);
+    /* Dihapus background gelapnya, biarkan transparan agar menyatu dengan body */
 }
 
 .hero-content{
@@ -139,91 +155,264 @@ h1, h2, h3 {
     z-index:2;
 }
 
-/* ================= SECTION ================= */
-section{
-    padding:100px 20px;
-    text-align:center;
+.hero-content h4 {
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: #5c4a3d;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    color: #8c7355;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    color: #7b9e78; /* Hijau daun */
+    font-weight: 600;
+}
+
+/* ================= FOTO COUPLE (FRAME GEOMETRIS & DAUN) ================= */
+.photo-wrapper {
+    position: relative;
+    width: 280px;
+    height: 380px; 
+    margin: 20px auto 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+/* Bingkai Geometris Hexagon / Polygon Gold */
+.photo-glow {
+    position: absolute;
+    inset: -5px;
+    border: 3px solid #d4af37;
+    transform: rotate(45deg); /* Efek bingkai ketupat/geometris */
+    border-radius: 20px;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+/* Container Foto utama */
+.couple-photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px; 
+    padding: 5px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    z-index: 2;
+    border: 2px solid #e8dec8;
+}
+
+.couple-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 15px; 
+    display: block;
+}
+
+/* Bunga/Daun Frame */
+.floral-frame {
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: url('https://png.pngtree.com/png-vector/20230816/ourmid/pngtree-watercolor-eucalyptus-wedding-invitation-wreath-vector-png-image_6982054.png') center/contain no-repeat;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.9;
 }
 
 /* ================= COUNTDOWN ================= */
+.countdown h2 {
+    font-size: 3rem;
+}
+
 .countdown-timer{
     display:flex;
     justify-content:center;
-    gap:25px;
+    gap:20px;
     flex-wrap:wrap;
-    margin-top:40px;
+    margin-top:30px;
 }
 
 .count-box{
-    background:rgba(255,255,255,0.05);
-    padding:30px;
-    border-radius:20px;
-    backdrop-filter:blur(10px);
-    box-shadow:0 10px 40px rgba(0,0,0,0.5);
-    width:130px;
+    background: rgba(255, 255, 255, 0.7);
+    padding:20px 25px;
+    border-radius:15px;
+    backdrop-filter:blur(5px);
+    box-shadow: 0 5px 20px rgba(139, 109, 67, 0.1);
+    border: 1px solid #e8dec8;
+    width:110px;
 }
 
 .count-box h3{
-    font-size:2.5rem;
+    font-size:2.2rem;
+    color: #7b9e78;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.count-box span {
+    color: #5c4a3d;
+    font-size: 0.9rem;
 }
 
 /* ================= COUPLE ================= */
+.couple h2 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
 .couple-container{
     display:flex;
-    gap:80px;
+    gap:50px;
     flex-wrap:wrap;
     justify-content:center;
     align-items:center;
 }
 
+.person h3 {
+    font-size: 2.5rem;
+    color: #8c7355;
+}
+
 .amp{
     font-size:4rem;
-    color:#d4af37;
+    color:#7b9e78;
+    font-family: 'Great Vibes', cursive;
 }
 
-/* ================= EVENT ================= */
+/* ================= EVENT / DETAIL ACARA ================= */
 .event-card{
-    background:rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.85);
     padding:40px;
-    border-radius:25px;
+    border-radius:20px;
     margin:30px auto;
     max-width:500px;
-    backdrop-filter:blur(15px);
-    box-shadow:0 15px 50px rgba(0,0,0,0.5);
-    transition:.4s;
+    box-shadow: 0 10px 40px rgba(139, 109, 67, 0.1);
+    border: 1px solid #e8dec8;
 }
 
-.event-card:hover{
-    transform:translateY(-10px);
+.event-card h3{
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.event-card p strong {
+    color: #7b9e78;
+    font-size: 1.1rem;
+}
+
+/* ================= STORY / ASMARALOKA ================= */
+.story-section {
+    background: none;
+}
+
+.story-section h2 {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+}
+
+.story-container::before{
+    background: #e8dec8;
+}
+
+.story-content{
+    background: rgba(255, 255, 255, 0.85);
+    padding:25px;
+    border-radius:15px;
+    box-shadow: 0 5px 20px rgba(139, 109, 67, 0.1);
+    border: 1px solid #e8dec8;
+    color: #5c4a3d;
+}
+
+.story-item::after{
+    background:#7b9e78;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(123, 158, 120, 0.4);
 }
 
 /* ================= GIFT ================= */
 .bank-card{
-    background:rgba(255,255,255,0.05);
-    padding:40px;
-    border-radius:25px;
+    background: rgba(255, 255, 255, 0.85);
+    padding:30px;
+    border-radius:20px;
     max-width:400px;
     margin:auto;
-    backdrop-filter:blur(10px);
+    border: 1px solid #e8dec8;
+    box-shadow: 0 5px 20px rgba(139, 109, 67, 0.1);
+}
+
+.bank-number {
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin: 10px 0;
+    font-weight: 600;
+    color: #8c7355;
 }
 
 .copy-btn{
     margin-top:15px;
     padding:10px 25px;
-    border:none;
+    border: 1px solid #7b9e78;
     border-radius:30px;
-    background:linear-gradient(45deg,#d4af37,#f6d365);
+    background: transparent;
+    color: #7b9e78;
+    font-weight: 600;
     cursor:pointer;
+    transition: 0.3s;
 }
 
-/* ================= COMMENT ================= */
+.copy-btn:hover {
+    background: #7b9e78;
+    color: white;
+}
+
+/* ================= UCAPAN ================= */
+.comment-section h2 {
+    font-size: 3.5rem;
+}
+
 .comment-box input,
 .comment-box textarea{
     width:100%;
     padding:15px;
     margin-bottom:15px;
     border-radius:10px;
+    border: 1px solid #e8dec8;
+    background: #fff;
+    color: #4a3b32;
+    font-family: 'Poppins', sans-serif;
+}
+
+.comment-box input:focus,
+.comment-box textarea:focus {
+    outline: none;
+    border-color: #7b9e78;
+}
+
+.comment-box button{
+    width:100%;
+    padding:15px;
     border:none;
+    border-radius:30px;
+    background: #8c7355;
+    color: white;
+    font-weight:600;
+    letter-spacing:1px;
+    cursor:pointer;
+    transition: 0.3s;
+}
+
+.comment-box button:hover {
+    background: #7a6345;
 }
 
 .comment-list{
@@ -231,492 +420,83 @@ section{
     text-align:left;
     max-width:600px;
     margin-inline:auto;
+    max-height: 400px; 
+    overflow-y: auto; 
+    padding-right: 10px;
 }
 
+.comment-list::-webkit-scrollbar { width: 5px; }
+.comment-list::-webkit-scrollbar-thumb { background: #e8dec8; border-radius: 5px; }
+
 .comment-item{
-    background:rgba(255,255,255,0.05);
+    background: #fff;
     padding:15px;
-    border-radius:15px;
+    border-radius:12px;
     margin-bottom:15px;
+    border-left: 4px solid #7b9e78;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
 
 /* ================= FOOTER ================= */
 footer{
-    padding:80px 20px;
-    background:black;
+    padding:60px 20px;
+    background: transparent;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    color: #5c4a3d;
 }
 
 /* ================= MUSIC PLAYER ================= */
-#music-player{
-    position:fixed;
-    bottom:30px;
-    right:30px;
-    z-index:9999;
-}
-
 #music-toggle{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    border:none;
-    background:linear-gradient(45deg,#d4af37,#f6d365);
-    font-size:26px;
-    cursor:pointer;
-    position:relative;
-    z-index:2;
+    background: #fff;
+    color: #7b9e78;
+    border: 2px solid #e8dec8;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .music-ring{
-    position:absolute;
-    width:70px;
-    height:70px;
-    border:2px solid rgba(212,175,55,0.6);
-    border-radius:50%;
-    animation:pulse 2.5s infinite;
+    border: 2px solid rgba(123, 158, 120, 0.5);
 }
 
-@keyframes pulse{
-    0%{transform:scale(1);opacity:.8;}
-    70%{transform:scale(1.6);opacity:0;}
-    100%{transform:scale(1.6);opacity:0;}
-}
+/* ================= HILANGKAN PARALLAX & PARTICLES GELAP ================= */
+.parallax-section { display: none; }
+#gold-particles { display: none; }
 
-/* ================= PARALLAX SECTION ================= */
-.parallax-section{
-    position: relative;
-    height: 100vh;
-    background: url('bg-wedding.jpg') center/cover no-repeat fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.parallax-overlay{
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-}
-
-.parallax-content{
-    position: relative;
-    z-index: 2;
-    color: white;
-    text-align: center;
-    animation: fadeUp 1.5s ease forwards;
-}
-
-#gold-particles{
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* ================= BRIDE GROOM PREMIUM ================= */
-.couple-section{
-    padding: 120px 20px;
-    background: linear-gradient(180deg,#000,#1a120c);
-    color: white;
-}
-
-.couple-box{
-    max-width: 1100px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    gap: 60px;
-    align-items: center;
-}
-
-.couple-box img{
-    width: 100%;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    transition: 0.5s;
-}
-
-.couple-box img:hover{
-    transform: scale(1.05);
-}
-
-/* ================= STORY SECTION ================= */
-.story-section{
-    padding:120px 20px;
-    background:linear-gradient(180deg,#0f0f0f,#1a120c);
-}
-
-.story-section h2{
-    margin-bottom:60px;
-}
-
-.story-container{
-    position:relative;
-    max-width:900px;
-    margin:auto;
-}
-
-.story-container::before{
-    content:'';
-    position:absolute;
-    left:50%;
-    top:0;
-    width:2px;
-    height:100%;
-    background:linear-gradient(#d4af37,transparent);
-    transform:translateX(-50%);
-}
-
-.story-item{
-    width:50%;
-    padding:20px 40px;
-    position:relative;
-}
-
-.story-item.left{
-    left:0;
-    text-align:right;
-}
-
-.story-item.right{
-    left:50%;
-}
-
-.story-content{
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(10px);
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.5);
-    transition:.4s;
-}
-
-.story-content:hover{
-    transform:translateY(-5px);
-}
-
-.story-item::after{
-    content:'';
-    position:absolute;
-    top:30px;
-    width:15px;
-    height:15px;
-    background:#d4af37;
-    border-radius:50%;
-    box-shadow:0 0 10px #d4af37;
-}
-
-.story-item.left::after{
-    right:-8px;
-}
-
-.story-item.right::after{
-    left:-8px;
-}
-
-/* ================= PREMIUM COMMENT BUTTON ================= */
-.comment-box button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:50px;
-    font-weight:600;
-    letter-spacing:2px;
-    cursor:pointer;
-    position:relative;
-    overflow:hidden;
-    transition:all .4s ease;
-    background:linear-gradient(45deg,#d4af37,#f6d365,#fff3b0);
-    color:#3a2a1d;
-    box-shadow:0 5px 20px rgba(212,175,55,0.3);
-}
-
-/* Shine effect */
-.comment-box button::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.5),
-        transparent
-    );
-    transition:.6s;
-}
-
-.comment-box button:hover::before{
-    left:100%;
-}
-
-.comment-box button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 30px rgba(212,175,55,0.6);
-}
-
-/* Klik effect */
-.comment-box button:active{
-    transform:scale(.96);
-}
-
-/* ================= GLOBAL MOBILE FIX ================= */
+/* ================= MOBILE RESPONSIVE ================= */
 @media (max-width:768px){
-    section{
-        padding:70px 20px;
-    }
-
-    h1{
-        font-size:2.2rem;
-        line-height:1.3;
-    }
-
-    h2{
-        font-size:1.6rem;
-        margin-bottom:25px;
-    }
-
-    p{
-        font-size:14px;
-        line-height:1.6;
-    }
-
-    .opening-content h1{
-        font-size: 2.8rem;
-    }
-
-    .opening-content h4{
-        font-size: 0.9rem;
-        letter-spacing: 3px;
-    }
-
-    .opening-content button{
-        padding: 12px 26px;
-        font-size: 14px;
-    }
-
-    .curtain{
-        transition: 1.2s ease;
-    }
-
-    .hero{
-        height:85vh;
-        padding:20px;
-    }
-
-    .hero-content h1{
-        font-size:2.4rem;
-    }
-
-    .hero-content h4{
-        font-size:14px;
-        letter-spacing:2px;
-    }
-
-    .countdown-timer{
-        gap:15px;
-    }
-
-    .count-box{
-        width:70px;
-        padding:18px;
-        border-radius:15px;
-    }
-
-    .count-box h3{
-        font-size:1.5rem;
-    }
-
-    .count-box span{
-        font-size:12px;
-    }
-
-    .couple-container{
-        flex-direction:column;
-        gap:25px;
-    }
-
-    .amp{
-        font-size:2.5rem;
-    }
-
-    .event-card{
-        padding:25px;
-        margin:20px auto;
-    }
-
-    .event-card h3{
-        font-size:1.2rem;
-    }
-
-    .parallax-section{
-        background-attachment: scroll;
-    }
-
-    #gold-particles{
-        display: none;
-    }
-
-    .story-container::before{
-        left:15px;
-    }
-
-    .story-item{
-        width:100%;
-        padding-left:45px;
-        padding-right:10px;
-        text-align:left;
-    }
-
-    .story-item.right{
-        left:0;
-    }
-
-    .story-item::after{
-        left:6px;
-    }
-
-    .bank-card{
-        padding:25px;
-    }
-
-    .bank-number{
-        font-size:14px;
-        word-break:break-all;
-    }
-
-    .comment-box input,
-    .comment-box textarea{
-        font-size:14px;
-    }
-
-    .comment-box button{
-        padding:14px;
-        font-size:14px;
-    }
-
-    #music-player{
-        bottom:20px;
-        right:20px;
-    }
-
-    #music-toggle{
-        width:55px;
-        height:55px;
-        font-size:18px;
-    }
-
-    .music-ring{
-        width:55px;
-        height:55px;
-    }
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2.5rem; margin-bottom: 20px; }
+    .opening-content h1 { font-size: 3.5rem; }
+    
+    .photo-wrapper { width: 220px; height: 300px; }
+    
+    .countdown-timer { gap: 10px; }
+    .count-box { width: 80px; padding: 15px; }
+    .count-box h3 { font-size: 1.5rem; }
+    
+    .story-item { width: 100%; padding-left: 30px; padding-right: 0; text-align: left !important; }
+    .story-item.right { left: 0; }
+    .story-container::before { left: 10px; }
+    .story-item::after { left: 1px; }
+    .story-item.left::after { left: 1px; right: auto; }
 }
-
-/* ================= FOTO COUPLE KUBBAH PRESISI & PREMIUM (2x3 RATIO) ================= */
-.photo-wrapper {
-    position: relative;
-    width: 320px;
-    height: 480px; /* Diubah agar rasio lebarnya 2 berbanding tinggi 3 (320x480) */
-    margin: 40px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* ================= MUKADIMAH ================= */
+.mukadimah {
+    padding: 60px 20px 20px;
 }
-
-/* Glow di belakang frame menyesuaikan bentuk kubah */
-.photo-glow {
-    position: absolute;
-    inset: 0;
-    border-radius: 160px 160px 20px 20px; 
-    background: radial-gradient(circle at center, rgba(247,200,224,0.6) 0%, transparent 70%);
-    filter: blur(20px);
-    box-shadow: 0 0 30px rgba(212,175,55,0.4);
-    animation: glowPulse 4s ease-in-out infinite;
-    z-index: 1;
+.mukadimah-container {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #e8dec8;
+    box-shadow: 0 5px 20px rgba(139, 109, 67, 0.05);
 }
-
-/* Frame Utama Bentuk Kubah (Arch) */
-.couple-photo {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 160px 160px 20px 20px; 
-    padding: 6px; 
-    background: linear-gradient(45deg, #d4af37, #f7c8e0, #fff);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-    box-sizing: border-box;
-    z-index: 2;
-}
-
-/* Memastikan foto di dalam ikut melengkung presisi */
-.couple-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 154px 154px 14px 14px; 
-    display: block;
-}
-
-/* Bunga Frame (Opsional) */
-.floral-frame {
-    position: absolute;
-    width: 130%;
-    height: 130%;
-    background: url('https://png.pngtree.com/png-vector/20230408/ourmid/pngtree-watercolor-floral-wreath-frame-png-image_6682977.png') center/contain no-repeat;
-    opacity: 0.6;
-    animation: rotateFrame 40s linear infinite;
-    pointer-events: none;
-    z-index: 3;
-}
-
-/* Efek Sparkle */
-.sparkle {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #fff;
-    animation: sparkleAnim 3s infinite ease-in-out;
-    z-index: 4;
-}
-
-.sparkle1 { top: 20%; left: 85%; animation-delay: 0s; }
-.sparkle2 { top: 75%; left: 5%; animation-delay: 1s; }
-.sparkle3 { top: 10%; left: 25%; animation-delay: 2s; }
-
-/* ================= ANIMASI ================= */
-@keyframes glowPulse {
-    0% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
-    100% { opacity: 0.5; transform: scale(1); }
-}
-
-@keyframes sparkleAnim {
-    0% { opacity: 0; transform: scale(0.5); }
-    50% { opacity: 1; transform: scale(1.2); }
-    100% { opacity: 0; transform: scale(0.5); }
-}
-
-@keyframes rotateFrame {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* ================= MOBILE UNTUK FOTO COUPLE (2x3 RATIO) ================= */
 @media (max-width: 768px) {
-    .photo-wrapper {
-        width: 260px;
-        height: 390px; /* Diubah agar rasio 2x3 tetap bertahan di layar HP (260x390) */
-    }
-    
-    .photo-glow, .couple-photo {
-        border-radius: 130px 130px 20px 20px;
-    }
-    
-    .couple-photo img {
-        border-radius: 124px 124px 14px 14px;
+    .mukadimah-container {
+        padding: 20px;
     }
 }
