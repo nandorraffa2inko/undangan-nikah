@@ -1,3 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Wedding Invitation - Selviyani & Utom</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<audio id="bg-music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="music-player">
+<div class="music-ring"></div>
+<button id="music-toggle">♫</button>
+</div>
+
+<!-- OPENING -->
+<div id="opening-cover">
+<div class="curtain left"></div>
+<div class="curtain right"></div>
+
+<div class="opening-content">
+<h4>THE WEDDING OF</h4>
+<h1>Selviyani Amelia & Muhammad Utom</h1>
+<button id="btn-buka">Buka Undangan</button>
+</div>
+</div>
+<div class="photo-wrapper">
+    <div class="floral-frame"></div>
+    <div class="photo-glow"></div>
+    <div class="sparkle sparkle1"></div>
+    <div class="sparkle sparkle2"></div>
+    <div class="sparkle sparkle3"></div>
+
+    <div class="couple-photo">
+        <img src="foto-couple.png" alt="Putri & Putra">
+    </div>
+</div>
+
 <main>
 
 <section class="hero">
@@ -161,3 +209,71 @@
 </footer>
 
 </main>
+
+<canvas id="gold-particles"></canvas>
+
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({duration:1200,once:true});</script>
+<script src="script.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { 
+  getFirestore, 
+  collection, 
+  addDoc, 
+  serverTimestamp,
+  query,
+  orderBy,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBo30suARbe1AoYiCKA7lZHvBELDIzqZJE",
+  authDomain: "undangan-selvi-utom.firebaseapp.com",
+  projectId: "undangan-selvi-utom",
+  storageBucket: "undangan-selvi-utom.firebasestorage.app",
+  messagingSenderId: "427727902420",
+  appId: "1:427727902420:web:3aa23cc497871345d94d41",
+  measurementId: "G-CKYCWEM63M"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// SIMPAN UCAPAN
+const form = document.getElementById("formUcapan");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const nama = document.getElementById("nama").value;
+  const pesan = document.getElementById("pesan").value;
+
+  await addDoc(collection(db, "ucapan"), {
+    nama: nama,
+    pesan: pesan,
+    waktu: serverTimestamp()
+  });
+
+  form.reset();
+});
+
+// TAMPILKAN UCAPAN REALTIME
+const listUcapan = document.getElementById("listUcapan");
+
+const q = query(collection(db, "ucapan"), orderBy("waktu", "desc"));
+
+onSnapshot(q, (snapshot) => {
+  listUcapan.innerHTML = "";
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    listUcapan.innerHTML += `
+      <div class="ucapan-item">
+        <strong>${data.nama}</strong>
+        <p>${data.pesan}</p>
+      </div>
+    `;
+  });
+});
+</script>
+</body>
+</html>
