@@ -778,3 +778,44 @@ footer{
         height:180px;
     }
 }
+
+/* ================= FOTO COUPLE PRESISI ================= */
+
+.photo-wrapper {
+    position: relative;
+    width: 320px;              /* ukuran frame */
+    height: 400px;
+    margin: 40px auto;
+}
+
+.couple-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 200px 200px 20px 20px; /* bentuk elegan */
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+}
+
+.couple-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;         /* 🔥 ini yang bikin presisi */
+    object-position: center;   /* selalu center */
+    display: block;
+}
+
+/* glow tetap presisi */
+.photo-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: 200px 200px 20px 20px;
+    box-shadow: 0 0 40px rgba(212,175,55,0.6);
+    z-index: 1;
+}
+@media (max-width: 768px) {
+    .photo-wrapper {
+        width: 260px;
+        height: 340px;
+    }
+}
