@@ -613,11 +613,11 @@ footer{
     }
 }
 
-/* ================= FOTO COUPLE KUBBAH PRESISI & PREMIUM ================= */
+/* ================= FOTO COUPLE KUBBAH PRESISI & PREMIUM (2x3 RATIO) ================= */
 .photo-wrapper {
     position: relative;
     width: 320px;
-    height: 400px;
+    height: 480px; /* Diubah agar rasio lebarnya 2 berbanding tinggi 3 (320x480) */
     margin: 40px auto;
     display: flex;
     justify-content: center;
@@ -705,11 +705,11 @@ footer{
     to { transform: rotate(360deg); }
 }
 
-/* ================= MOBILE UNTUK FOTO COUPLE ================= */
+/* ================= MOBILE UNTUK FOTO COUPLE (2x3 RATIO) ================= */
 @media (max-width: 768px) {
     .photo-wrapper {
         width: 260px;
-        height: 340px;
+        height: 390px; /* Diubah agar rasio 2x3 tetap bertahan di layar HP (260x390) */
     }
     
     .photo-glow, .couple-photo {
