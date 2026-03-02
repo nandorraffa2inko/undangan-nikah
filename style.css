@@ -8,136 +8,104 @@
 
 body{
     font-family:'Poppins',sans-serif;
-    /* Background krem terang dengan tekstur kertas/watercolor halus */
-    background-color: #fdfbf7;
-    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-    color:#4a3b32; /* Teks warna cokelat gelap elegan */
+    background-color:#fdfbf7;
+    background-image:url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    color:#4a3b32;
     overflow-x:hidden;
+    position:relative;
 }
 
-/* Ornamen Daun di atas dan bawah layar (Efek Botanical) */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 300px;
-    background: url('https://png.pngtree.com/png-vector/20221021/ourmid/pngtree-watercolor-eucalyptus-leaves-border-png-image_6356784.png') top center/contain no-repeat;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: 0;
+/* ================= ORNAMEN DAUN ================= */
+body::before,
+body::after{
+    content:'';
+    position:fixed;
+    left:0;
+    width:100%;
+    height:260px;
+    background:url('https://png.pngtree.com/png-vector/20221021/ourmid/pngtree-watercolor-eucalyptus-leaves-border-png-image_6356784.png') center/contain no-repeat;
+    opacity:.7;
+    pointer-events:none;
+    z-index:0;
 }
 
-body::after {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 300px;
-    background: url('https://png.pngtree.com/png-vector/20221021/ourmid/pngtree-watercolor-eucalyptus-leaves-border-png-image_6356784.png') bottom center/contain no-repeat;
-    opacity: 0.8;
-    pointer-events: none;
-    transform: rotate(180deg);
-    z-index: 0;
+body::before{ top:0; }
+body::after{
+    bottom:0;
+    transform:rotate(180deg);
 }
 
 /* ================= TYPOGRAPHY ================= */
-h1, h2, h3 {
-    font-family: 'Great Vibes', cursive;
-    color: #8c7355; /* Warna cokelat emas/bronze */
-    font-weight: 400;
+h1,h2,h3{
+    font-family:'Great Vibes',cursive;
+    font-weight:400;
+    color:#8c7355;
 }
 
-/* ================= OPENING COVER ================= */
+section{
+    padding:80px 20px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+/* ================= OPENING ================= */
 #opening-cover{
     position:fixed;
     inset:0;
     z-index:9999;
-    overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
     transition:1.5s;
-    background-color: #fdfbf7;
-    background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+    background:#fdfbf7;
+    background-image:url('https://www.transparenttextures.com/patterns/cream-paper.png');
 }
 
-/* Opening Content */
 .opening-content{
-    position:relative;
-    z-index:10;
     text-align:center;
-    color:#4a3b32;
-}
-
-.opening-content h4{
-    letter-spacing:4px;
-    margin-bottom:15px;
-    font-weight:400;
-    font-family: 'Poppins', sans-serif;
-    text-transform: uppercase;
-    font-size: 0.9rem;
 }
 
 .opening-content h1{
-    font-size:4.5rem;
-    margin:10px 0;
-    color: #7a6345;
+    font-size:4rem;
+    margin:15px 0;
+    color:#7a6345;
 }
 
-/* Button */
-#btn-buka,
-.opening-content button{
+#btn-buka{
     margin-top:30px;
     padding:12px 40px;
     border-radius:50px;
-    border: 1px solid #7b9e78; /* Border hijau daun */
-    background: #fcf9f2;
-    cursor:pointer;
+    border:1px solid #7b9e78;
+    background:#fff;
+    color:#7b9e78;
     font-weight:600;
-    transition:.4s;
-    letter-spacing:1px;
-    color: #7b9e78;
+    cursor:pointer;
+    transition:.3s;
 }
 
-#btn-buka:hover,
-.opening-content button:hover{
+#btn-buka:hover{
+    background:#7b9e78;
+    color:#fff;
     transform:scale(1.05);
-    background: #7b9e78;
-    color: white;
-    box-shadow: 0 5px 15px rgba(123, 158, 120, 0.4);
+    box-shadow:0 5px 15px rgba(123,158,120,.3);
 }
 
-/* Curtain - Diubah menjadi tirai terang */
 .curtain{
     position:absolute;
     top:0;
     width:50%;
     height:100%;
-    background: #f4eee1;
+    background:#f4eee1;
     transition:1.8s cubic-bezier(.77,0,.18,1);
-    z-index:1;
 }
 
-.left{left:0; border-right: 1px solid #e8dec8;}
-.right{right:0; border-left: 1px solid #e8dec8;}
+.left{left:0;}
+.right{right:0;}
 
 #opening-cover.open .left{transform:translateX(-100%);}
 #opening-cover.open .right{transform:translateX(100%);}
-#opening-cover.open{
-    opacity:0;
-    visibility:hidden;
-}
-
-/* ================= SECTION GLOBAL ================= */
-section{
-    padding:80px 20px;
-    text-align:center;
-    position: relative;
-    z-index: 2; /* Di atas dekorasi daun body */
-}
+#opening-cover.open{opacity:0;visibility:hidden;}
 
 /* ================= HERO ================= */
 .hero{
@@ -145,95 +113,40 @@ section{
     display:flex;
     align-items:center;
     justify-content:center;
-    text-align:center;
+}
+
+.hero-content h1{font-size:4rem;}
+.hero-content p{
+    margin-top:10px;
+    font-weight:600;
+    color:#7b9e78;
+}
+
+/* ================= FOTO ================= */
+.photo-wrapper{
     position:relative;
-    /* Dihapus background gelapnya, biarkan transparan agar menyatu dengan body */
+    width:260px;
+    height:360px;
+    margin:20px auto 40px;
 }
 
-.hero-content{
-    position:relative;
-    z-index:2;
+.couple-photo{
+    width:100%;
+    height:100%;
+    border-radius:20px;
+    overflow:hidden;
+    border:2px solid #e8dec8;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+    background:#fff;
 }
 
-.hero-content h4 {
-    letter-spacing: 3px;
-    font-weight: 400;
-    color: #5c4a3d;
-}
-
-.hero-content h1 {
-    font-size: 4rem;
-    color: #8c7355;
-}
-
-.hero-content p {
-    font-size: 1.1rem;
-    margin-top: 10px;
-    color: #7b9e78; /* Hijau daun */
-    font-weight: 600;
-}
-
-/* ================= FOTO COUPLE (FRAME GEOMETRIS & DAUN) ================= */
-.photo-wrapper {
-    position: relative;
-    width: 280px;
-    height: 380px; 
-    margin: 20px auto 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 5;
-}
-
-/* Bingkai Geometris Hexagon / Polygon Gold */
-.photo-glow {
-    position: absolute;
-    inset: -5px;
-    border: 3px solid #d4af37;
-    transform: rotate(45deg); /* Efek bingkai ketupat/geometris */
-    border-radius: 20px;
-    z-index: 1;
-    opacity: 0.5;
-}
-
-/* Container Foto utama */
-.couple-photo {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px; 
-    padding: 5px;
-    background: #fff;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    z-index: 2;
-    border: 2px solid #e8dec8;
-}
-
-.couple-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 15px; 
-    display: block;
-}
-
-/* Bunga/Daun Frame */
-.floral-frame {
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    background: url('https://png.pngtree.com/png-vector/20230816/ourmid/pngtree-watercolor-eucalyptus-wedding-invitation-wreath-vector-png-image_6982054.png') center/contain no-repeat;
-    pointer-events: none;
-    z-index: 3;
-    opacity: 0.9;
+.couple-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
 /* ================= COUNTDOWN ================= */
-.countdown h2 {
-    font-size: 3rem;
-}
-
 .countdown-timer{
     display:flex;
     justify-content:center;
@@ -243,159 +156,81 @@ section{
 }
 
 .count-box{
-    background: rgba(255, 255, 255, 0.7);
-    padding:20px 25px;
-    border-radius:15px;
-    backdrop-filter:blur(5px);
-    box-shadow: 0 5px 20px rgba(139, 109, 67, 0.1);
-    border: 1px solid #e8dec8;
+    background:#fff;
+    padding:20px;
     width:110px;
+    border-radius:15px;
+    border:1px solid #e8dec8;
+    box-shadow:0 5px 20px rgba(139,109,67,.08);
 }
 
 .count-box h3{
-    font-size:2.2rem;
-    color: #7b9e78;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-}
-
-.count-box span {
-    color: #5c4a3d;
-    font-size: 0.9rem;
-}
-
-/* ================= COUPLE ================= */
-.couple h2 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
-}
-
-.couple-container{
-    display:flex;
-    gap:50px;
-    flex-wrap:wrap;
-    justify-content:center;
-    align-items:center;
-}
-
-.person h3 {
-    font-size: 2.5rem;
-    color: #8c7355;
-}
-
-.amp{
-    font-size:4rem;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:2rem;
     color:#7b9e78;
-    font-family: 'Great Vibes', cursive;
 }
 
-/* ================= EVENT / DETAIL ACARA ================= */
+/* ================= EVENT ================= */
 .event-card{
-    background: rgba(255, 255, 255, 0.85);
+    background:#fff;
     padding:40px;
     border-radius:20px;
-    margin:30px auto;
     max-width:500px;
-    box-shadow: 0 10px 40px rgba(139, 109, 67, 0.1);
-    border: 1px solid #e8dec8;
+    margin:30px auto;
+    border:1px solid #e8dec8;
+    box-shadow:0 10px 40px rgba(139,109,67,.08);
 }
 
-.event-card h3{
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.event-card p strong {
-    color: #7b9e78;
-    font-size: 1.1rem;
-}
-
-/* ================= STORY / ASMARALOKA ================= */
-.story-section {
-    background: none;
-}
-
-.story-section h2 {
-    font-size: 3.5rem;
-    margin-bottom: 40px;
-}
-
-.story-container::before{
-    background: #e8dec8;
-}
-
-.story-content{
-    background: rgba(255, 255, 255, 0.85);
-    padding:25px;
-    border-radius:15px;
-    box-shadow: 0 5px 20px rgba(139, 109, 67, 0.1);
-    border: 1px solid #e8dec8;
-    color: #5c4a3d;
-}
-
-.story-item::after{
-    background:#7b9e78;
-    border: 3px solid #fff;
-    box-shadow: 0 0 10px rgba(123, 158, 120, 0.4);
-}
-
-/* ================= GIFT ================= */
+/* ================= BANK ================= */
 .bank-card{
-    background: rgba(255, 255, 255, 0.85);
+    background:#fff;
     padding:30px;
     border-radius:20px;
     max-width:400px;
     margin:auto;
-    border: 1px solid #e8dec8;
-    box-shadow: 0 5px 20px rgba(139, 109, 67, 0.1);
+    border:1px solid #e8dec8;
+    box-shadow:0 5px 20px rgba(139,109,67,.08);
 }
 
-.bank-number {
-    font-size: 1.3rem;
-    letter-spacing: 2px;
-    margin: 10px 0;
-    font-weight: 600;
-    color: #8c7355;
+.bank-number{
+    font-size:1.3rem;
+    letter-spacing:2px;
+    margin:10px 0;
+    font-weight:600;
+    color:#8c7355;
 }
 
 .copy-btn{
-    margin-top:15px;
     padding:10px 25px;
-    border: 1px solid #7b9e78;
     border-radius:30px;
-    background: transparent;
-    color: #7b9e78;
-    font-weight: 600;
+    border:1px solid #7b9e78;
+    background:transparent;
+    color:#7b9e78;
     cursor:pointer;
-    transition: 0.3s;
+    transition:.3s;
 }
 
-.copy-btn:hover {
-    background: #7b9e78;
-    color: white;
+.copy-btn:hover{
+    background:#7b9e78;
+    color:#fff;
 }
 
 /* ================= UCAPAN ================= */
-.comment-section h2 {
-    font-size: 3.5rem;
-}
-
 .comment-box input,
 .comment-box textarea{
     width:100%;
     padding:15px;
     margin-bottom:15px;
     border-radius:10px;
-    border: 1px solid #e8dec8;
-    background: #fff;
-    color: #4a3b32;
-    font-family: 'Poppins', sans-serif;
+    border:1px solid #e8dec8;
+    font-family:'Poppins',sans-serif;
 }
 
 .comment-box input:focus,
-.comment-box textarea:focus {
-    outline: none;
-    border-color: #7b9e78;
+.comment-box textarea:focus{
+    outline:none;
+    border-color:#7b9e78;
 }
 
 .comment-box button{
@@ -403,100 +238,67 @@ section{
     padding:15px;
     border:none;
     border-radius:30px;
-    background: #8c7355;
-    color: white;
+    background:#8c7355;
+    color:#fff;
     font-weight:600;
-    letter-spacing:1px;
     cursor:pointer;
-    transition: 0.3s;
+    transition:.3s;
 }
 
-.comment-box button:hover {
-    background: #7a6345;
+.comment-box button:hover{
+    background:#7a6345;
 }
 
 .comment-list{
     margin-top:40px;
-    text-align:left;
     max-width:600px;
     margin-inline:auto;
-    max-height: 400px; 
-    overflow-y: auto; 
-    padding-right: 10px;
+    max-height:350px;
+    overflow-y:auto;
+    padding-right:5px;
 }
 
-.comment-list::-webkit-scrollbar { width: 5px; }
-.comment-list::-webkit-scrollbar-thumb { background: #e8dec8; border-radius: 5px; }
-
 .comment-item{
-    background: #fff;
+    background:#fff;
     padding:15px;
     border-radius:12px;
     margin-bottom:15px;
-    border-left: 4px solid #7b9e78;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    border-left:4px solid #7b9e78;
+    box-shadow:0 2px 10px rgba(0,0,0,.03);
 }
 
 /* ================= FOOTER ================= */
 footer{
     padding:60px 20px;
-    background: transparent;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-    color: #5c4a3d;
+    text-align:center;
+    color:#5c4a3d;
 }
 
-/* ================= MUSIC PLAYER ================= */
+/* ================= MUSIC BUTTON ================= */
 #music-toggle{
-    background: #fff;
-    color: #7b9e78;
-    border: 2px solid #e8dec8;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    background:#fff;
+    border:1px solid #e8dec8;
+    color:#7b9e78;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
-.music-ring{
-    border: 2px solid rgba(123, 158, 120, 0.5);
-}
+/* ================= MOBILE ================= */
+@media(max-width:768px){
 
-/* ================= HILANGKAN PARALLAX & PARTICLES GELAP ================= */
-.parallax-section { display: none; }
-#gold-particles { display: none; }
+    h1{font-size:2.8rem;}
+    h2{font-size:2.3rem;}
 
-/* ================= MOBILE RESPONSIVE ================= */
-@media (max-width:768px){
-    h1 { font-size: 2.8rem; }
-    h2 { font-size: 2.5rem; margin-bottom: 20px; }
-    .opening-content h1 { font-size: 3.5rem; }
-    
-    .photo-wrapper { width: 220px; height: 300px; }
-    
-    .countdown-timer { gap: 10px; }
-    .count-box { width: 80px; padding: 15px; }
-    .count-box h3 { font-size: 1.5rem; }
-    
-    .story-item { width: 100%; padding-left: 30px; padding-right: 0; text-align: left !important; }
-    .story-item.right { left: 0; }
-    .story-container::before { left: 10px; }
-    .story-item::after { left: 1px; }
-    .story-item.left::after { left: 1px; right: auto; }
-}
-/* ================= MUKADIMAH ================= */
-.mukadimah {
-    padding: 60px 20px 20px;
-}
-.mukadimah-container {
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.6);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid #e8dec8;
-    box-shadow: 0 5px 20px rgba(139, 109, 67, 0.05);
-}
-@media (max-width: 768px) {
-    .mukadimah-container {
-        padding: 20px;
+    .photo-wrapper{
+        width:220px;
+        height:300px;
+    }
+
+    .count-box{
+        width:80px;
+        padding:15px;
+    }
+
+    .count-box h3{
+        font-size:1.4rem;
     }
 }
