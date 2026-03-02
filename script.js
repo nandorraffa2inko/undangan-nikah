@@ -67,7 +67,7 @@ seconds.textContent = Math.floor((distance/1000)%60);
 },1000);
 }
 
-/* ================= COPY REKENING (MULTI) ================= */
+/* ================= COPY REKENING ================= */
 const copyButtons = document.querySelectorAll(".copy-btn");
 
 copyButtons.forEach(button=>{
@@ -85,28 +85,6 @@ button.textContent = "Salin Nomor";
 
 });
 });
-
-/* ================= COMMENT SYSTEM ================= */
-const form = document.getElementById("comment-form");
-const list = document.getElementById("comment-list");
-
-if(form){
-form.addEventListener("submit", function(e){
-
-e.preventDefault();
-
-const name = document.getElementById("name").value;
-const message = document.getElementById("message").value;
-
-const div = document.createElement("div");
-div.classList.add("comment-item");
-div.innerHTML = `<strong>${name}</strong><p>${message}</p>`;
-
-list.prepend(div);
-form.reset();
-
-});
-}
 
 /* ================= GOLD PARTICLES ================= */
 const canvas = document.getElementById("gold-particles");
