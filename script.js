@@ -1,178 +1,137 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-/* ================= ELEMENT ================= */
-const btn = document.getElementById("btn-buka");
-const cover = document.getElementById("opening-cover");
-const music = document.getElementById("bg-music");
-const toggle = document.getElementById("music-toggle");
+    /* ================= OTOMATISASI NAMA TAMU ================= */
+    const urlParams = new URLSearchParams(window.location.search);
+    const namaTamu = urlParams.get('to') || urlParams.get('nama');
+    
+    if(namaTamu){
+        const elemenNama = document.getElementById('nama-tamu');
+        if(elemenNama){
+            // Mengganti teks HTML dengan nama dari link
+            elemenNama.innerText = namaTamu;
+        }
+    }
 
-/* ================= OPENING + MUSIC FADE ================= */
-if(btn){
-btn.addEventListener("click", function(){
+    /* ... (kode Anda yang lain seperti btn-buka, music, dll tetap di bawah sini) ... */
 
-cover.classList.add("open");
+    /* ================= ELEMENT ================= */
+    const btn = document.getElementById("btn-buka");
+    const cover = document.getElementById("opening-cover");
+    const music = document.getElementById("bg-music");
+    const toggle = document.getElementById("music-toggle");
 
-if(music){
-music.volume = 0;
-music.play().catch(()=>{});
+    /* ================= OPENING & MUSIC ================= */
+    if(btn){
+        btn.addEventListener("click", function(){
+            // MENAMBAHKAN KELAS 'OPEN' UNTUK ANIMASI HILANG KE ATAS
+            cover.classList.add("open");
 
-let fade = setInterval(function(){
-if(music.volume < 0.5){
-music.volume += 0.02;
-}else{
-clearInterval(fade);
-}
-},200);
-}
+            // MEMULAI MUSIK DENGAN FADE IN
+            if(music){
+                music.volume = 0;
+                music.play().catch(()=>{});
 
-});
-}
+                let fade = setInterval(function(){
+                    if(music.volume < 0.5){ // Volume maksimal 0.5
+                        music.volume += 0.02;
+                    }else{
+                        clearInterval(fade);
+                    }
+                }, 200); // 0.2 detik per step volume
+            }
 
-/* ================= MUSIC TOGGLE ================= */
-if(toggle && music){
-toggle.addEventListener("click", function(){
-if(music.paused){
-music.play();
-}else{
-music.pause();
-}
-});
-}
+        });
+    }
 
-/* ================= COUNTDOWN ================= */
-const wedding = new Date("April 5, 2026 12:00:00").getTime();
+    /* ================= MUSIC TOGGLE ================= */
+    if(toggle && music){
+        toggle.addEventListener("click", function(){
+            if(music.paused){
+                music.play();
+                toggle.textContent = "♫";
+            }else{
+                music.pause();
+                toggle.textContent = "✓"; // Tanda pause
+            }
+        });
+    }
 
-const days = document.getElementById("days");
-const hours = document.getElementById("hours");
-const minutes = document.getElementById("minutes");
-const seconds = document.getElementById("seconds");
-const timerBox = document.getElementById("countdown-timer");
+    /* ================= COUNTDOWN ================= */
+    const weddingDate = new Date("April 5, 2026 12:00:00").getTime();
 
-if(days){
-setInterval(function(){
+    const daysSpan = document.getElementById("days");
+    const hoursSpan = document.getElementById("hours");
+    const minutesSpan = document.getElementById("minutes");
+    const secondsSpan = document.getElementById("seconds");
+    const timerBox = document.getElementById("countdown-timer");
 
-const now = new Date().getTime();
-const distance = wedding - now;
+    if(daysSpan){
+        setInterval(function(){
 
-if(distance < 0){
-timerBox.innerHTML = "<h3>Acara Sedang Berlangsung 💍</h3>";
-return;
-}
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
 
-days.textContent = Math.floor(distance/(1000*60*60*24));
-hours.textContent = Math.floor((distance/(1000*60*60))%24);
-minutes.textContent = Math.floor((distance/(1000*60))%60);
-seconds.textContent = Math.floor((distance/1000)%60);
+            if(distance < 0){
+                timerBox.innerHTML = "<h3>Acara Telah Berlalu atau Sedang Berlangsung 💍</h3>";
+                return;
+            }
 
-},1000);
-}
+            daysSpan.textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
+            hoursSpan.textContent = Math.floor((distance / (1000 * 60 * 60)) % 24);
+            minutesSpan.textContent = Math.floor((distance / (1000 * 60)) % 60);
+            secondsSpan.textContent = Math.floor((distance / 1000) % 60);
 
-/* ================= COPY REKENING (MULTI) ================= */
-const copyButtons = document.querySelectorAll(".copy-btn");
+        }, 1000);
+    }
 
-copyButtons.forEach(button=>{
-button.addEventListener("click", function(){
+    /* ================= COPY REKENING ================= */
+    const copyButtons = document.querySelectorAll(".copy-btn");
 
-const number = button.parentElement.querySelector(".bank-number").textContent;
+    copyButtons.forEach(button=>{
+        button.addEventListener("click", function(){
 
-navigator.clipboard.writeText(number);
+            const number = button.parentElement.querySelector(".bank-number").textContent;
 
-button.textContent = "Berhasil Disalin ✓";
+            // Navigator clipboard API (modern)
+            navigator.clipboard.writeText(number).then(()=>{
+                button.textContent = "✓ Disalin";
+                setTimeout(()=>{ button.textContent = "Salin Nomor"; }, 2000);
+            }).catch(()=>{
+                button.textContent = "Gagal!"; // Jika clipboard gagal
+            });
 
-setTimeout(()=>{
-button.textContent = "Salin Nomor";
-},2000);
+        });
+    });
 
-});
-});
+    /* ================= UCAPAN FORM (REALTIME FIREBASE SUDAH DI HTML) ================= */
+    /* Kode ini dipertahankan hanya jika Anda tidak menggunakan Firebase dan ingin simulasi */
+    const formAlternative = document.getElementById("comment-form");
+    const listAlternative = document.getElementById("comment-list");
 
-/* ================= COMMENT SYSTEM ================= */
-const form = document.getElementById("comment-form");
-const list = document.getElementById("comment-list");
+    if(formAlternative && !listAlternative.innerHTML){ // Cek jika bukan Firebase
+        formAlternative.addEventListener("submit", function(e){
+            e.preventDefault();
 
-if(form){
-form.addEventListener("submit", function(e){
+            const name = document.getElementById("name").value;
+            const message = document.getElementById("message").value;
 
-e.preventDefault();
+            const div = document.createElement("div");
+            div.style.cssText = "background:rgba(255,255,255,0.7);padding:15px;margin-bottom:15px;border-radius:12px;box-shadow: 0 2px 10px rgba(0,0,0,0.05); color: #4a3e36;";
+            div.innerHTML = `<strong>${name}</strong><p style="margin-top:5px; font-size: 14px;">${message}</p>`;
 
-const name = document.getElementById("name").value;
-const message = document.getElementById("message").value;
+            listAlternative.prepend(div);
+            formAlternative.reset();
+        });
+    }
 
-const div = document.createElement("div");
-div.classList.add("comment-item");
-div.innerHTML = `<strong>${name}</strong><p>${message}</p>`;
-
-list.prepend(div);
-form.reset();
-
-});
-}
-
-/* ================= GOLD PARTICLES ================= */
-const canvas = document.getElementById("gold-particles");
-
-if(canvas){
-
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas(){
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-let particles = [];
-
-for(let i=0;i<60;i++){
-particles.push({
-x: Math.random()*canvas.width,
-y: Math.random()*canvas.height,
-r: Math.random()*2,
-d: Math.random()*1
-});
-}
-
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="rgba(212,175,55,0.8)";
-ctx.beginPath();
-
-particles.forEach(p=>{
-ctx.moveTo(p.x,p.y);
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
-});
-
-ctx.fill();
-update();
-}
-
-function update(){
-particles.forEach(p=>{
-p.y += p.d;
-
-if(p.y > canvas.height){
-p.y = 0;
-p.x = Math.random()*canvas.width;
-}
-});
-}
-
-setInterval(draw,33);
-
-}
-
-/* ================= PARALLAX ================= */
-window.addEventListener("scroll", function(){
-
-const parallax = document.querySelector(".parallax-section");
-
-if(parallax){
-let offset = window.pageYOffset;
-parallax.style.backgroundPositionY = offset * 0.5 + "px";
-}
-
-});
+    /* ================= PARALLAX BACKGROUND EVENT ================= */
+    window.addEventListener("scroll", function(){
+        const parallax = document.querySelector(".parallax-section");
+        if(parallax){
+            let offset = window.pageYOffset;
+            // Geser posisi background vertikal seiring scroll
+            parallax.style.backgroundPositionY = offset * 0.4 + "px"; // 0.4 adalah kecepatannya
+        }
+    });
 
 });
